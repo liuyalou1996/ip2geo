@@ -26,6 +26,7 @@
         <mybatis.plus.generator>3.5.2</mybatis.plus.generator>
         <geoip2.version>2.15.0</geoip2.version>
         <ip2region.versoin>2.6.5</ip2region.versoin>
+        <mybatis.plus.generator>3.5.2</mybatis.plus.generator>
     </properties>
 
     <dependencyManagement>
@@ -94,6 +95,10 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
@@ -113,6 +118,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis.plus.generator}</version>
+            <scope>test</scope>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

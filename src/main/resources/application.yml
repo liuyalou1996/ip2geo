@@ -19,3 +19,36 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     call-setters-on-nulls: true
+# http client configuration
+http:
+  client:
+    max-total: 500 # 连接池最大连接数
+    default-max-per-route: 100 # 每个路由最大连接数
+    max-idle-time: 5s # 连接最大空闲时间
+    connection-request-timeout: 3s # 从连接池获取连接超时时间
+    connection-timeout: 5s # 与服务端建立连接超时时间
+    socket-timeout: 10s # 客户端从服务器读取数据超时时间\
+# thread pool configuration
+thread:
+  pool:
+    core-pool-size: 10
+    max-pool-size: 100
+    queue-capacity: 1024
+    keep-alive-seconds: 60s
+    wait-for-tasks-to-complete-on-shutdown: true
+    thread-name-prefix: ip2geo
+# ip resolve
+ip2geo:
+  db-path:
+    geoip2: C:\Users\Nick\Ip2Geo\db\GeoLite2-City.mmdb
+    ip2region: C:\Users\Nick\Ip2Geo\db\ip2region.xdb
+  db-source:
+    geoip2-blocks: C:\Users\Nick\Ip2Geo\GeoLite2-City-CSV_20220722\blocks\GeoIP2-City-Blocks-IPv4-String.csv
+    geoip2-locations: C:\Users\Nick\Ip2Geo\GeoLite2-City-CSV_20220722\locations\GeoLite2-City-Locations-zh-CN.csv
+    ip2-region: C:\Users\Nick\Ip2Geo\Ip2Region\ip.merge.txt
+# baidu translation api
+baidu:
+  translation:
+    api-url: https://fanyi-api.baidu.com/api/trans/vip/translate
+    app-id: 20220727001284985
+    app-secret: vgYz4M1LyEkYqoCkFQl3

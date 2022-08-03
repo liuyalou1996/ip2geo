@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.universe.ip2geo.mapper.Geoip2NetworkMapper">
+
+    <insert id="saveNetworkInfo" parameterType="com.universe.ip2geo.pojo.domain.Geoip2NetworkDO">
+        insert into t_geoip2_network(network_start,
+                                     network_end,
+                                     geoname_id,
+                                     registered_country_geoname_id,
+                                     represented_country_geoname_id,
+                                     is_anonymous_proxy,
+                                     is_satellite_provider,
+                                     postal_code,
+                                     latitude,
+                                     longitude,
+                                     accuracy_radius)
+        value ( inet6_aton(#{networkStart}),
+                inet6_aton(#{networkEnd}),
+                #{geonameId},
+                #{registeredCountryGeonameId},
+                #{representedCountryGeonameId},
+                #{isAnonymousProxy},
+                #{isSatelliteProvider},
+                #{postalCode},
+                #{latitude},
+                #{longitude},
+                #{accuracyRadius}
+            );
+    </insert>
+
+    <insert id="batchSaveNetworkInfo" parameterType="java.util.List">
+        insert into t_geoip2_network(network_start,
+                                     network_end,
+                                     geoname_id,
+                                     registered_country_geoname_id,
+                                     represented_country_geoname_id,
+                                     is_anonymous_proxy,
+                                     is_satellite_provider,
+                                     postal_code,
+                                     latitude,
+                                     longitude,
+                                     accuracy_radius)
+            values
+            <foreach collection="list" item="item" open=" " close=" " separator=",">
+                (   inet6_aton(#{item.networkStart}),
+                    inet6_aton(#{item.networkEnd}),
+                    #{item.geonameId},
+                    #{item.registeredCountryGeonameId},
+                    #{item.representedCountryGeonameId},
+                    #{item.isAnonymousProxy},
+                    #{item.isSatelliteProvider},
+                    #{item.postalCode},
+                    #{item.latitude},
+                    #{item.longitude},
+                    #{item.accuracyRadius}
+                )
+            </foreach>
+    </insert>
+</mapper>

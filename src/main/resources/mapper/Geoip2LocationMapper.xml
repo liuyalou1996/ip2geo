@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.universe.ip2geo.mapper.Geoip2LocationMapper">
+    <insert id="batchSaveLocationInfo" parameterType="java.util.List">
+        insert into t_geoip2_location(geoname_id,
+                                      locale_code,
+                                      continent_code,
+                                      continent_name,
+                                      country_iso_code,
+                                      country_name,
+                                      subdivision_1_iso_code,
+                                      subdivision_1_name,
+                                      subdivision_2_iso_code,
+                                      subdivision_2_name,
+                                      city_name,
+                                      metro_code,
+                                      time_zone,
+                                      is_in_european_union)
+        values
+        <foreach collection="list" item="item" open=" " close=" " separator=",">
+            (   #{item.geonameId},
+                #{item.localeCode},
+                #{item.continentCode},
+                #{item.continentName},
+                #{item.countryIsoCode},
+                #{item.countryName},
+                #{item.subdivision1IsoCode},
+                #{item.subdivision1Name},
+                #{item.subdivision2IsoCode},
+                #{item.subdivision2Name},
+                #{item.cityName},
+                #{item.metroCode},
+                #{item.timeZone},
+                #{item.isInEuropeanUnion}
+            )
+        </foreach>
+    </insert>
+</mapper>

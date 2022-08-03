@@ -1,7 +1,7 @@
 package com.universe.ip2geo.config;
 
 import com.universe.ip2geo.manager.HttpClientManager;
-import com.universe.ip2geo.pojo.propreties.HttpClientProperties;
+import com.universe.ip2geo.pojo.propreties.common.HttpClientProperties;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.HttpClients;

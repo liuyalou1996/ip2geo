@@ -1,7 +1,6 @@
 package com.universe.ip2geo.manager;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.Data;
 import org.apache.http.Consts;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -20,6 +19,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.message.AbstractHttpMessage;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
@@ -33,6 +33,7 @@ import java.util.Map;
  * @author 刘亚楼
  * @date 2022/5/10
  */
+@Component
 public class HttpClientManager {
 
 	private final HttpClient httpClient;
@@ -106,6 +107,7 @@ public class HttpClientManager {
 			HttpClientResp resp = new HttpClientResp();
 
 			int statusCode = response.getStatusLine().getStatusCode();
+			resp.setStatusCode(statusCode);
 			if (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES) {
 				Map<String, String> headers = new HashMap<>();
 				for (Header header : response.getAllHeaders()) {
@@ -128,68 +130,16 @@ public class HttpClientManager {
 
 	}
 
+	@Data
 	public static class HttpClientResp {
 
+		private int statusCode;
 		private String respContent;
 		private long contentLength;
 		private String contentType;
 		private String contentEncoding;
 		private Map<String, String> headers;
 		private boolean successful;
-
-		public String getRespContent() {
-			return respContent;
-		}
-
-		public void setRespContent(String respContent) {
-			this.respContent = respContent;
-		}
-
-		public long getContentLength() {
-			return contentLength;
-		}
-
-		public void setContentLength(long contentLength) {
-			this.contentLength = contentLength;
-		}
-
-		public String getContentType() {
-			return contentType;
-		}
-
-		public void setContentType(String contentType) {
-			this.contentType = contentType;
-		}
-
-		public String getContentEncoding() {
-			return contentEncoding;
-		}
-
-		public void setContentEncoding(String contentEncoding) {
-			this.contentEncoding = contentEncoding;
-		}
-
-		public Map<String, String> getHeaders() {
-			return headers;
-		}
-
-		public void setHeaders(Map<String, String> headers) {
-			this.headers = headers;
-		}
-
-		public boolean isSuccessful() {
-			return successful;
-		}
-
-		public void setSuccessful(boolean successful) {
-			this.successful = successful;
-		}
-
-		@Override
-		public String toString() {
-			return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-		}
-
 	}
 
 }

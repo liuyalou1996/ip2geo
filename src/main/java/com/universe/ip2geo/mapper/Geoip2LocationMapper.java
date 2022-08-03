@@ -1,7 +1,7 @@
 package com.universe.ip2geo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.universe.pojo.domain.Geoip2LocationDO;
+import com.universe.ip2geo.pojo.domain.Geoip2LocationDO;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.universe.ip2geo.pojo.propreties;
+package com.universe.ip2geo.pojo.propreties.common;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
