@@ -5,8 +5,8 @@ spring:
       url: jdbc:mysql://gz-cdb-drh06wqx.sql.tencentcdb.com:57613/insurance?serverTimeZone=UTC
       username: lingbomanbu
       password: Lyl14786632348
-      initial-size: 100
-      max-active: 100
+      initial-size: 10
+      max-active: 50
       max-wait: 10000
       test-on-borrow: false
       test-on-return: false

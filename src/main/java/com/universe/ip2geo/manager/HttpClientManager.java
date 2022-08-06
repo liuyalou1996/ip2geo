@@ -1,6 +1,7 @@
 package com.universe.ip2geo.manager;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.Consts;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -19,10 +20,10 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.message.AbstractHttpMessage;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +34,7 @@ import java.util.Map;
  * @author 刘亚楼
  * @date 2022/5/10
  */
-@Component
+@Slf4j
 public class HttpClientManager {
 
 	private final HttpClient httpClient;
@@ -57,7 +58,8 @@ public class HttpClientManager {
 			}
 		}
 
-		HttpGet httpGet = new HttpGet(uriBuilder.build());
+		URI uri = uriBuilder.build();
+		HttpGet httpGet = new HttpGet(uri);
 		return getResponse(httpGet);
 	}
 

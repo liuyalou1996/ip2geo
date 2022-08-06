@@ -33,7 +33,7 @@ public class BaiduTranslationApiDTO {
 	/**
 	 * appId
 	 */
-	private String appId;
+	private String appid;
 
 	/**
 	 * 随机颜值

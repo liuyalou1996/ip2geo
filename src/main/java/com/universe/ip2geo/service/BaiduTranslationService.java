@@ -39,7 +39,7 @@ public class BaiduTranslationService {
 			.q(queryText)
 			.from(fromLanguage.getCode())
 			.to(toLanguage.getCode())
-			.appId(appId)
+			.appid(appId)
 			.salt(salt)
 			.sign(signature)
 			.build();
@@ -48,13 +48,14 @@ public class BaiduTranslationService {
 			Map<String, Object> params = JsonUtils.javaBeanToMap(baiduTranslationApiDTO);
 			HttpClientResp httpClientResp = httpClientManager.get(baiduTranslationProperties.getApiUrl(), params);
 			if (!httpClientResp.isSuccessful()) {
-				throw new IllegalStateException("HTTP请求状态码返回: " + httpClientResp.getStatusCode());
+				log.error("HTTP请求失败, 状态码:{}", httpClientResp.getStatusCode());
+				return StringUtils.EMPTY;
 			}
 
 			BaiduApiTranslationResp translationResp = JsonUtils.toJavaBean(httpClientResp.getRespContent(), BaiduApiTranslationResp.class);
 			if (StringUtils.isNotBlank(translationResp.getErrorCode())) {
-				String errorMsg = String.format("百度翻译错误码: %s,错误消息: %s", translationResp.getErrorCode(), translationResp.getErrorMsg());
-				throw new IllegalStateException(errorMsg);
+				log.error("请求百度翻译Api失败, 错误码:{}, 错误消息:{}", translationResp.getErrorCode(), translationResp.getErrorMsg());
+				return StringUtils.EMPTY;
 			}
 
 			TransResult transResult = translationResp.getTransResult().stream().findFirst().orElseGet(TransResult::new);
